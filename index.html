@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <script src="https://miro.com/app/static/sdk.1.1.js"></script>
-    <script>
+  <script src="https://miro.com/app/static/sdk.1.1.js"></script>
+  <script>
     miro.onReady(() => {
       miro.initialize({
         extensionPoints: {
@@ -15,16 +16,21 @@
           }
         }
       });
-      let widgets = await miro.board.widgets.get();
-      console.log(widgets);
+      (async () => {
+        let widgets = await miro.board.widgets.get();
+        console.log(widgets);
+      })();
+      
     });
 
 
 
-    </script>
+  </script>
 </head>
+
 <body>
   <h1>aplicacion miro</h1>
   <img src="robot-corto.svg" />
 </body>
+
 </html>
