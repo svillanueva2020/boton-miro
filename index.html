@@ -6,11 +6,11 @@
   <script>
 
     const colores = {
-      colorBoton : "#050B42"
+      colorBoton: "#050B42"
     };
     const tiposFrame = {
-      tipoframe : "FRAME",
-      tipoLine : "LINE"
+      tipoframe: "FRAME",
+      tipoLine: "LINE"
     };
 
 
@@ -54,14 +54,13 @@
               widgetsHijos.push(widgetHijo);
             });
 
-            if (widgetsHijos && event.data[0] && event.data[0].id) {
-              let lineaBtn = widgetsHijos.find(widget => widget.type == tiposFrame.tipoLine && (widget.startWidgetId ? widget.startWidgetId.id == event.data[0].id : false));
-              if (lineaBtn) {
-                let widgetActualizar = widgetsHijos.find(widget => widget.id == lineaBtn.endWidgetId);
-              }
-              console.log("widgets hijos encontrados", widgetsHijos);
-              console.log("widgets A actualizar", widgetActualizar);
+            let lineaBtn = widgetsHijos.find(widget => widget.type == tiposFrame.tipoLine && (widget.startWidgetId ? widget.startWidgetId.id == event.data[0].id : false));
+            if (lineaBtn) {
+              let widgetActualizar = widgetsHijos.find(widget => widget.id == lineaBtn.endWidgetId);
             }
+            console.log("Linea encontrada", lineaBtn);
+            console.log("widgets hijos encontrados", widgetsHijos);
+            console.log("widgets A actualizar", widgetActualizar);
           }
         }
 
