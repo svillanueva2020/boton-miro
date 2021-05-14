@@ -7,13 +7,12 @@
 
     const colores =
     {
-      colorBoton = "#050B42",
-    }
-      ;
+      colorBoton = "#050B42"
+    };
     const tiposFrame =
     {
       tipoframe = "FRAME",
-      tipoLine = "LINE",
+      tipoLine = "LINE"
     };
 
 
@@ -56,16 +55,19 @@
               let widgetHijo = widgets.find(widget => widget.id === idChildren);
               widgetsHijos.push(widgetHijo);
             });
+
+            if (widgetsHijos && event.data[0] && event.data[0].id) {
+              let lineaBtn = widgetsHijos.find(widget => widget.type == tiposFrame.tipoLine && (widget.startWidgetId ? widget.startWidgetId.id == event.data[0].id : false));
+              if (lineaBtn) {
+                let widgetActualizar = widgetsHijos.find(widget => widget.id == lineaBtn.endWidgetId);
+              }
+              console.log("widgets hijos encontrados", widgetsHijos);
+              console.log("widgets A actualizar", widgetActualizar);
+            }
           }
+
         }
-        if (widgetsHijos && event.data[0] && event.data[0].id) {
-          let lineaBtn = widgetsHijos.find(widget => widget.type == tiposFrame.tipoLine && (widget.startWidgetId ? widget.startWidgetId.id == event.data[0].id : false));
-          if (lineaBtn) {
-            let widgetActualizar = widgetsHijos.find(widget => widget.id == lineaBtn.endWidgetId);
-          }
-          console.log("widgets hijos encontrados", widgetsHijos);
-          console.log("widgets A actualizar", widgetActualizar);
-        }
+
 
         // if(event.data[0].id === "3074457358776878119"){
         //   setTimeout(() => {
