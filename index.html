@@ -56,8 +56,9 @@
               });
 
               let lineaBtn = widgetsHijos.find(widget => (widget.startWidgetId ? widget.startWidgetId == event.data[0].id : false));
+              let widgetActualizar=[];
               if (lineaBtn) {
-                let widgetActualizar = widgetsHijos.find(widget => widget.id == lineaBtn.endWidgetId);
+                widgetActualizar = widgetsHijos.find(widget => widget.id == lineaBtn.endWidgetId);
               }
               console.log("Linea encontrada", lineaBtn);
               console.log("widgets hijos encontrados", widgetsHijos);
