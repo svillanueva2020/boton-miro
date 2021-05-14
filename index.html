@@ -32,9 +32,11 @@
       })();
 
       async function handleSelectionUpdated(event) {
-        if(event.data[0].id === "3074457358776998742"){
-          await miro.board.widgets.update({id: "3074457358776998742", text: 'Esta es la respuesta de ADA'})
-        } 
+        if(event.data[0].id === "3074457358776878119"){
+          setTimeout(() => {
+            await miro.board.widgets.update({id: "3074457358776998742", text: 'Esta es la respuesta de ADA'})
+          }, 2000);
+        }
         console.log("evento seleccionado", event);
       }
 
