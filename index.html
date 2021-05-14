@@ -54,7 +54,7 @@
                 widgetsHijos.push(widgetHijo);
               });
 
-              let lineaBtn = widgetsHijos.find(widget => widget.type == tiposFrame.tipoLine && (widget.startWidgetId ? widget.startWidgetId.id == event.data[0].id : false));
+              let lineaBtn = widgetsHijos.find(widget => (widget.type == tiposFrame.tipoLine && (widget.startWidgetId ? widget.startWidgetId.id == event.data[0].id : false)));
               if (lineaBtn) {
                 let widgetActualizar = widgetsHijos.find(widget => widget.id == lineaBtn.endWidgetId);
               }
