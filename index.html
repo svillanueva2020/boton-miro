@@ -4,6 +4,21 @@
 <head>
   <script src="https://miro.com/app/static/sdk.1.1.js"></script>
   <script>
+
+    const colores =
+    {
+      colorBoton = "#050B42",
+    }
+      ;
+    const tiposFrame =
+    {
+      tipoframe = "FRAME",
+      tipoLine = "LINE",
+    };
+
+
+    var widgets = [];
+
     miro.onReady(() => {
       miro.initialize({
         extensionPoints: {
@@ -27,22 +42,38 @@
         }
       });
       (async () => {
-        let widgets = await miro.board.widgets.get();
+        this.widgets = await miro.board.widgets.get();
         console.log("estos son mis wifgets", widgets);
       })();
 
       async function handleSelectionUpdated(event) {
-        if(event.data[0].id === "3074457358776878119"){
-          setTimeout(() => {
-            await miro.board.widgets.update({id: "3074457358776998742", text: 'Esta es la respuesta de ADA'})
-          }, 2000);
+        let widgetsHijos = [];
+
+        if (event.data[0] && event.data[0].id) {
+          let frame = widgets.find(widget => widget.type == tiposFrame.tipoframe && widget.childrenIds.includes(event.data[0].id));
+          if (frame) {
+            frame.childrenIds.forEach(idChildren => {
+              let widgetHijo = widgets.find(widget => widget.id === idChildren);
+              widgetsHijos.push(widgetHijo);
+            });
+          }
         }
-        console.log("evento seleccionado", event);
+        if (widgetsHijos && event.data[0] && event.data[0].id) {
+          let lineaBtn = widgetsHijos.find(widget => widget.type == tiposFrame.tipoLine && (widget.startWidgetId ? widget.startWidgetId.id == event.data[0].id : false));
+          if (lineaBtn) {
+            let widgetActualizar = widgetsHijos.find(widget => widget.id == lineaBtn.endWidgetId);
+          }
+          console.log("widgets hijos encontrados", widgetsHijos);
+          console.log("widgets A actualizar", widgetActualizar);
+        }
+
+        // if(event.data[0].id === "3074457358776878119"){
+        //   setTimeout(() => {
+        //     await miro.board.widgets.update({id: "3074457358776998742", text: 'Esta es la respuesta de ADA'})
+        //   }, 2000);
+        // }
       }
-
-      
-      miro.addListener('SELECTION_UPDATED', handleSelectionUpdated)
-
+      miro.addListener('SELECTION_UPDATED', handleSelectionUpdated);
     });
 
 
