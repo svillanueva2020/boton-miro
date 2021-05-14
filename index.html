@@ -31,12 +31,14 @@
         console.log("estos son mis wifgets", widgets);
       })();
 
-      function handleSelectionUpdated(event) {
+      async function handleSelectionUpdated(event) {
         if(event.data[0].id === "3074457358776998742"){
           await miro.board.widgets.update({id: "3074457358776998742", text: 'Esta es la respuesta de ADA'})
         }
         console.log("evento seleccionado", event);
       }
+
+      
       miro.addListener('SELECTION_UPDATED', handleSelectionUpdated)
 
     });
