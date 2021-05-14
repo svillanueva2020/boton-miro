@@ -6,7 +6,7 @@
   <script>
 
     const colores = {
-      colorBoton: "#050B42"
+      colorBoton: "#050b42"
     };
     const tiposFrame = {
       tipoframe: "FRAME",
@@ -45,9 +45,8 @@
 
       async function handleSelectionUpdated(event) {
         let widgetsHijos = [];
-
+        console.log("emtre al al evento")
         if (event.data[0] && event.data[0].id) {
-          if (event.data[0].style && event.data[0].style.borderColor == colores.colorBoton) {
             let frame = widgets.find(widget => widget.type == tiposFrame.tipoframe && widget.childrenIds.includes(event.data[0].id));
             if (frame) {
               frame.childrenIds.forEach(idChildren => {
@@ -63,7 +62,6 @@
               console.log("widgets hijos encontrados", widgetsHijos);
               console.log("widgets A actualizar", widgetActualizar);
             }
-          }
         }
 
 
