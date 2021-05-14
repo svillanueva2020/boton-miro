@@ -47,6 +47,7 @@
         let widgetsHijos = [];
         console.log("emtre al al evento")
         if (event.data[0] && event.data[0].id) {
+              console.log("el evento es",event)
             let frame = widgets.find(widget => widget.type == tiposFrame.tipoframe && widget.childrenIds.includes(event.data[0].id));
             if (frame) {
               frame.childrenIds.forEach(idChildren => {
