@@ -50,7 +50,7 @@
         if (event.data[0] && event.data[0].id) {
           widgetSeleccionado = widgets.find(widget => widget.id === event.data[0].id);
 
-          if (widgetSeleccionado && widgetSeleccionado.style && widgetSeleccionado.style.backgroundColor == colores.colorBoton) {
+          if (widgetSeleccionado && widgetSeleccionado.style && widgetSeleccionado.style.borderColor == colores.colorBoton) {
             console.log("el evento es", event);
             let frame = widgets.find(widget => widget.type == tiposFrame.tipoframe && widget.childrenIds.includes(event.data[0].id));
             if (frame) {
