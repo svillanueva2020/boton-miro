@@ -64,7 +64,7 @@
             console.log("widgets hijos encontrados", widgetsHijos);
             console.log("widgets A actualizar", widgetActualizar);
 
-            setTimeout(() => {
+            setTimeout(async() => {
               await miro.board.widgets.update({ id: widgetActualizar.id, text: `Esta es la respuesta de ADA numero ramdom es ${Math.random()}`});
             }, 2000);
           }
