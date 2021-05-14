@@ -47,31 +47,28 @@
         let widgetsHijos = [];
         console.log("emtre al al evento")
         if (event.data[0] && event.data[0].id) {
-              console.log("el evento es",event);
-            let frame = widgets.find(widget => widget.type == tiposFrame.tipoframe && widget.childrenIds.includes(event.data[0].id));
-            if (frame) {
-              frame.childrenIds.forEach(idChildren => {
-                let widgetHijo = widgets.find(widget => widget.id === idChildren);
-                widgetsHijos.push(widgetHijo);
-              });
+          console.log("el evento es", event);
+          let frame = widgets.find(widget => widget.type == tiposFrame.tipoframe && widget.childrenIds.includes(event.data[0].id));
+          if (frame) {
+            frame.childrenIds.forEach(idChildren => {
+              let widgetHijo = widgets.find(widget => widget.id === idChildren);
+              widgetsHijos.push(widgetHijo);
+            });
 
-              let lineaBtn = widgetsHijos.find(widget => (widget.startWidgetId ? widget.startWidgetId == event.data[0].id : false));
-              let widgetActualizar=[];
-              if (lineaBtn) {
-                widgetActualizar = widgetsHijos.find(widget => widget.id == lineaBtn.endWidgetId);
-              }
-              console.log("Linea encontrada", lineaBtn);
-              console.log("widgets hijos encontrados", widgetsHijos);
-              console.log("widgets A actualizar", widgetActualizar);
+            let lineaBtn = widgetsHijos.find(widget => (widget.startWidgetId ? widget.startWidgetId == event.data[0].id : false));
+            let widgetActualizar = [];
+            if (lineaBtn) {
+              widgetActualizar = widgetsHijos.find(widget => widget.id == lineaBtn.endWidgetId);
             }
+            console.log("Linea encontrada", lineaBtn);
+            console.log("widgets hijos encontrados", widgetsHijos);
+            console.log("widgets A actualizar", widgetActualizar);
+
+            setTimeout(() => {
+              await miro.board.widgets.update({ id: widgetActualizar.id, text: `Esta es la respuesta de ADA numero ramdom es ${Math.random()}`});
+            }, 2000);
+          }
         }
-
-
-        // if(event.data[0].id === "3074457358776878119"){
-        //   setTimeout(() => {
-        //     await miro.board.widgets.update({id: "3074457358776998742", text: 'Esta es la respuesta de ADA'})
-        //   }, 2000);
-        // }
       }
       miro.addListener('SELECTION_UPDATED', handleSelectionUpdated);
     });
