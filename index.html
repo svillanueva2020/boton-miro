@@ -47,7 +47,7 @@
         let widgetsHijos = [];
         console.log("emtre al al evento")
         if (event.data[0] && event.data[0].id) {
-              console.log("el evento es",event)
+              console.log("el evento es",event);
             let frame = widgets.find(widget => widget.type == tiposFrame.tipoframe && widget.childrenIds.includes(event.data[0].id));
             if (frame) {
               frame.childrenIds.forEach(idChildren => {
@@ -55,7 +55,7 @@
                 widgetsHijos.push(widgetHijo);
               });
 
-              let lineaBtn = widgetsHijos.find(widget => (widget.startWidgetId ? widget.startWidgetId.id == event.data[0].id : false));
+              let lineaBtn = widgetsHijos.find(widget => (widget.startWidgetId ? widget.startWidgetId == event.data[0].id : false));
               if (lineaBtn) {
                 let widgetActualizar = widgetsHijos.find(widget => widget.id == lineaBtn.endWidgetId);
               }
