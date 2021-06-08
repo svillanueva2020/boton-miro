@@ -34,15 +34,14 @@
 
     const getProblemas = async (peticion) => {
     const response = await fetch(`${URL_SERVICES}problema/`, {
-      method: 'PUT',
-      body: peticion, 
+      method: 'POST',
+      body: JSON.stringify(peticion), 
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': `${URL_SERVICES}problema/`,
-        'Access-Control-Allow-Methods': 'PUT'
+        'Content-Type': 'application/json'
       }
     });
-     return await response.json(); 
+     let respuesta =  await response.json(); 
+     return respuesta.descripcion;
     }
 
     miro.onReady(() => {
@@ -116,6 +115,9 @@
                 
                 console.log("La peticion al servicio es ", peticion)
                 const rtaProblemas = await getProblemas(peticion);
+                if(elementoActualizar && rtaProblemas){
+                    console.log("Entro para actualizar");
+                }
               }
               let widgetActualizar = [];
               if (lineaProblema) {
