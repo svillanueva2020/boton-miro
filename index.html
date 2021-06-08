@@ -60,8 +60,7 @@
                 let widgetHijo = widgets.find(widget => widget.id === idChildren);
                 widgetsHijos.push(widgetHijo);
               });
-
-              let lineaProblema = widgets.find(widget => (widget.endWidgetId ? widget.endWidgetId == event.data[0].id : false));
+              let lineaProblema = widgets.find(widget => widget.type == tiposFrame.tipoLine && widget.endWidgetId == event.data[0].id);
               let widgetActualizar = [];
               if (lineaProblema) {
                 widgetActualizar = widgetsHijos.find(widget => widget.id == lineaProblema.endWidgetId);
