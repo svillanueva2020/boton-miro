@@ -119,9 +119,9 @@
                     console.log("Elemento a actualizar", elementoActualizar);
                     console.log("Respuesta del servicio", rtaProblemas);
                     let textToShow = "<ul>";
-                      for (let element of rtaProblemas.entries()) {
-                          textToShow.concat(`<li>${element}</li>`);
-                      }
+                      rtaProblemas.forEach((clave, valor)=>{
+                        textToShow.concat(`<li>${valor}</li>`);
+                      })
                     textToShow.concat("</ul>");
                   
                     miro.board.widgets.update({ id: elementoActualizar.id, text:  textToShow});
