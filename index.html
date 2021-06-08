@@ -40,8 +40,10 @@
         }
       });
       (async () => {
+        miroWid = await miro;
+        console.log("Miro", miroWid);
         widgets = await miro.board.widgets.get();
-        console.log("estos son mis wifgets", widgets);
+        console.log("Widgets", widgets);
       })();
 
       async function handleSelectionUpdated(event) {
