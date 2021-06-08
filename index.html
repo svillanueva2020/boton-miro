@@ -119,8 +119,8 @@
                     console.log("Elemento a actualizar", elementoActualizar);
                     console.log("Respuesta del servicio", rtaProblemas);
                     let textToShow = "<ul>";
-                      for (let i = 0 ; rtaProblemas.length; i++) {
-                        textToShow.concat(`<li>${rtaProblemas[i]}</li>`);  
+                      for (const it in rtaProblemas) {
+                        textToShow.concat(`<li>${rtaProblemas[it]}</li>`);  
                       }
                     textToShow.concat("</ul>");
                   
