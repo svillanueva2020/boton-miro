@@ -46,7 +46,7 @@
       async function handleSelectionUpdated(event) {
         let widgetsHijos = [];
         let widgetSeleccionado;
-        console.log("emtre al al evento")
+        console.log("emtre al al evento", event)
         if (event.data[0] && event.data[0].id) {
           widgetSeleccionado = widgets.find(widget => widget.id === event.data[0].id);
 
