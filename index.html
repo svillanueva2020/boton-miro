@@ -106,6 +106,7 @@
                 peticion.situacion_ideal = situacionIdealWG.planinText;
                 peticion.situacion_actual = situacionActualWG.planinText;
                 
+                console.log("La peticion al servicio es ", peticion)
                 const rtaProblemas = await getProblemas(peticion);
               }
               let widgetActualizar = [];
