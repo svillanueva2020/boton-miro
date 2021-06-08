@@ -26,10 +26,6 @@
       return widgets.find(widget => widget.type == tiposFrame.tipoframe && widget.childrenIds.includes(idElement));
     }
 
-    findElementByColor = (elementos, color) =>{
-     return elementos.find(widget=> widget.style.borderColor == color);
-    }
-
     const getProblemas = async (peticion) => {
     const response = await fetch(`${URL_SERVICES}problema/`, {
       method: 'PUT',
@@ -93,10 +89,10 @@
                   });
                 }
                 console.log("Estos son los hijos del frame de referencia ", widgetsHijos);
-                let metaFinalWG = findElementByColor(widgetsHijos, colores.colorMetaFinal);
-                let situacionActualWG = findElementByColor(widgetsHijos, colores.colorSituacionActual);
-                let situacionIdealWG = findElementByColor(widgetsHijos, colores.colorSituacionIdeal);
-                let diferenciaWG = findElementByColor(widgetsHijos, colores.colorDiferencia);
+                let metaFinalWG = widgetsHijos.find(widget=> widget.style.borderColor == colores.colorMetaFinal); 
+                let situacionActualWG = widgetsHijos.find(widget=> widget.style.borderColor == colores.colorSituacionActual);  
+                let situacionIdealWG = widgetsHijos.find(widget=> widget.style.borderColor == colores.colorSituacionIdeal); 
+                let diferenciaWG = widgetsHijos.find(widget=> widget.style.borderColor == colores.colorDiferencia);  
                 
                 //Se arma la peticion al servicio
                 let peticion = {};
