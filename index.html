@@ -18,11 +18,27 @@
       tipoLine: "LINE"
     };
 
+    const URL_SERVICES = 'https://eureka-help-asw.azurewebsites.net/';
    
     var widgets = [];
 
     findFrameParent = (idElement)=>{
       return widgets.find(widget => widget.type == tiposFrame.tipoframe && widget.childrenIds.includes(idElement));
+    }
+
+    findElementByColor = (elementos, color) =>{
+     return elementos.find(widget=> widget.style.borderColor == color);
+    }
+
+    const getProblemas = async (peticion) => {
+    const response = await fetch(`${URL_SERVICES}problema/`, {
+      method: 'PUT',
+      body: peticion, 
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+     return await response.json(); 
     }
 
     miro.onReady(() => {
@@ -62,19 +78,34 @@
 
           if (widgetSeleccionado && widgetSeleccionado.style && widgetSeleccionado.style.borderColor == colores.colorBoton) {
             console.log("el evento es", event);
-            let frame = widgets.find(widget => widget.type == tiposFrame.tipoframe && widget.childrenIds.includes(event.data[0].id));
-            if (frame) {
-              frame.childrenIds.forEach(idChildren => {
-                let widgetHijo = widgets.find(widget => widget.id === idChildren);
-                widgetsHijos.push(widgetHijo);
-              });
               let lineaProblema = widgets.find(widget => widget.type == tiposFrame.tipoLine && widget.endWidgetId == event.data[0].id);
               if(lineaProblema){
+                //obtengo un widget de referencia para encontrar el frame donde se encuentra la sección del problema
                 let widgetReferencia = widgets.find(x => x.id == lineaProblema.startWidgetId);
                 let frameReferencia = findFrameParent(widgetReferencia.id);
+                
+                //obtengo los elementos del frame de referencia para extraer sus valores
                 if(frameReferencia){
-
+                    frameReferencia.childrenIds.forEach(idChildren => {
+                    let widgetHijo = widgets.find(widget => widget.id === idChildren);
+                    widgetsHijos.push(widgetHijo);
+                  });
                 }
+                console.log("Estos son los hijos del frame de referencia ", widgetsHijos);
+                let metaFinalWG = findElementByColor(widgetsHijos, colores.colorMetaFinal);
+                let situacionActualWG = findElementByColor(widgetsHijos, colores.colorSituacionActual);
+                let situacionIdealWG = findElementByColor(widgetsHijos, colores.colorSituacionIdeal);
+                let diferenciaWG = findElementByColor(widgetsHijos, colores.colorDiferencia);
+                
+                //Se arma la peticion al servicio
+                let peticion = {};
+      
+                peticion.problema = diferenciaWG.planinText;
+                peticion.meta = metaFinalWG.planinText;
+                peticion.situacion_ideal = situacionIdealWG.planinText;
+                peticion.situacion_actual = situacionActualWG.planinText;
+                
+                const rtaProblemas = await getProblemas(peticion);
               }
               let widgetActualizar = [];
               if (lineaProblema) {
@@ -83,7 +114,7 @@
               console.log("Linea encontrada", lineaProblema);
               console.log("widgets hijos encontrados", widgetsHijos);
               console.log("widgets A actualizar", widgetActualizar);
-            }
+            
           }
 
           if (widgetSeleccionado && widgetSeleccionado.style && widgetSeleccionado.style.borderColor == colores.colorBotonContramedida) {
