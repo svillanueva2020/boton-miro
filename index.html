@@ -35,7 +35,8 @@
       method: 'PUT',
       body: peticion, 
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': URL_SERVICES,
       }
     });
      return await response.json(); 
