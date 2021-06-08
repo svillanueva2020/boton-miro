@@ -23,7 +23,7 @@
     var widgets = [];
 
     findFrameParent = (idElement)=>{
-      widgets.find(widget => widget.type == tiposFrame.tipoframe && widget.childrenIds.includes(idElement));
+      return widgets.find(widget => widget.type == tiposFrame.tipoframe && widget.childrenIds.includes(idElement));
     }
 
     miro.onReady(() => {
