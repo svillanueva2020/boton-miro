@@ -6,7 +6,8 @@
   <script>
 
     const colores = {
-      colorBoton: "#050b42"
+      colorBoton: "#050b42",
+      colorBotonContramedida: "#fac710"
     };
     const tiposFrame = {
       tipoframe: "FRAME",
@@ -75,6 +76,10 @@
               }
 
             }
+          }
+
+          if (widgetSeleccionado && widgetSeleccionado.style && widgetSeleccionado.style.borderColor == colores.colorBotonContramedida) {
+            console.log("Ingreso por el boton de contramedida", event);
           }
 
         }
