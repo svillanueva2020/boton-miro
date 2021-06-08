@@ -63,7 +63,7 @@
                 widgetsHijos.push(widgetHijo);
               });
 
-              let lineaBtn = widgetsHijos.find(widget => (widget.startWidgetId ? widget.startWidgetId == event.data[0].id : false));
+              let lineaBtn = widgetsHijos.find(widget => (widget.endWidgetId ? widget.endWidgetId == event.data[0].id : false));
               let widgetActualizar = [];
               if (lineaBtn) {
                 widgetActualizar = widgetsHijos.find(widget => widget.id == lineaBtn.endWidgetId);
