@@ -40,8 +40,6 @@
         }
       });
       (async () => {
-        miroWid = await miro;
-        console.log("Miro", miroWid);
         widgets = await miro.board.widgets.get();
         console.log("Widgets", widgets);
       })();
