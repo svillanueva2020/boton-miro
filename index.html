@@ -120,9 +120,9 @@
                     console.log("Respuesta del servicio", rtaProblemas);
                     let textToShow = "<ul>";
                       for (const it in rtaProblemas) {
-                        textToShow.concat(`<li>${rtaProblemas[it]}</li>`);  
+                        textToShow = textToShow.concat(`<li>${rtaProblemas[it]}</li>`);  
                       }
-                    textToShow.concat("</ul>");
+                    textToShow = textToShow.concat("</ul>");
                   
                     miro.board.widgets.update({ id: elementoActualizar.id, text:  textToShow});
                 }
