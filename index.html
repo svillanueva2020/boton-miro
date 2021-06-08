@@ -7,7 +7,12 @@
 
     const colores = {
       colorBoton: "#050b42",
-      colorBotonContramedida: "#3ed730"
+      colorBotonContramedida: "#3ed730", 
+      colorLineaProblema: "#cee741",
+      colorMetaFinal: "#fef445",
+      colorSituacionIdeal : "#fac710", 
+      colorSituacionActual: "#f24726",
+      colorDiferencia: "#e6e6e6"
     };
     const tiposFrame = {
       tipoframe: "FRAME",
@@ -60,7 +65,14 @@
                 let widgetHijo = widgets.find(widget => widget.id === idChildren);
                 widgetsHijos.push(widgetHijo);
               });
-              let lineaProblema = widgets.find(widget => widget.type == tiposFrame.tipoLine && widget.endWidgetId == event.data[0].id);
+              let lineaProblema = widgets.find(widget => widget.type == tiposFrame.tipoLine && x.style.lineColor == colores.colorLineaProblema);
+              if(lineaProblema){
+                let widgetReferencia = widgets.find(x => x.id == lineaProblema.startWidgetId);
+                let frameReferencia = widgets.find(widget => widget.type == tiposFrame.tipoframe && widget.childrenIds.includes(widgetReferencia.id));
+                if(frameReferencia){
+                  
+                }
+              }
               let widgetActualizar = [];
               if (lineaProblema) {
                 widgetActualizar = widgetsHijos.find(widget => widget.id == lineaProblema.endWidgetId);
