@@ -21,9 +21,15 @@
     const URL_SERVICES = 'https://eureka-help-asw.azurewebsites.net/';
    
     var widgets = [];
+    var frameCausaRaiz = null;
 
     findFrameParent = (idElement)=>{
       return widgets.find(widget => widget.type == tiposFrame.tipoframe && widget.childrenIds.includes(idElement));
+    }
+
+    findElementToUpdate = (idElement)=>{
+        let lineaAux = widgets.find(widget => widget.type == tiposFrame.tipoLine && widget.startWidgetId == idElement);
+        return widgets.find(widget => widget.id == lineaAux.endWidgetId);
     }
 
     const getProblemas = async (peticion) => {
@@ -82,6 +88,8 @@
                 let widgetReferencia = widgets.find(x => x.id == lineaProblema.startWidgetId);
                 let frameReferencia = findFrameParent(widgetReferencia.id);
                 
+                frameCausaRaiz = findFrameParent(event.data[0].id);
+
                 //obtengo los elementos del frame de referencia para extraer sus valores
                 if(frameReferencia){
                     frameReferencia.childrenIds.forEach(idChildren => {
@@ -95,6 +103,9 @@
                 let situacionIdealWG = widgetsHijos.find(widget=> widget.style.borderColor == colores.colorSituacionIdeal); 
                 let diferenciaWG = widgetsHijos.find(widget=> widget.style.borderColor == colores.colorDiferencia);  
                 
+                //obtenemos el elemento que se va a actualizar 
+                let elementoActualizar = findElementToUpdate(event.data[0].id);
+
                 //Se arma la peticion al servicio
                 let peticion = {};
       
@@ -118,6 +129,15 @@
 
           if (widgetSeleccionado && widgetSeleccionado.style && widgetSeleccionado.style.borderColor == colores.colorBotonContramedida) {
             console.log("Ingreso por el boton de contramedida", event);
+            let widgetsCausaRaiz = [];
+            if(frameCausaRaiz){
+              console.log("Frame causa raiz, ", frameCausaRaiz);
+              frameCausaRaiz.childrenIds.forEach(idChildren => {
+                    let widgetHijo = widgets.find(widget => widget.id === idChildren);
+                    widgetsCausaRaiz.push(widgetHijo);
+  
+              });
+              console.log("Elementos causa raiz", widgetsCausaRaiz);
           }
 
         }
