@@ -8,7 +8,6 @@
     const colores = {
       colorBoton: "#050b42",
       colorBotonContramedida: "#3ed730", 
-      colorLineaProblema: "#cee741",
       colorMetaFinal: "#fef445",
       colorSituacionIdeal : "#fac710", 
       colorSituacionActual: "#f24726",
@@ -69,7 +68,7 @@
                 let widgetHijo = widgets.find(widget => widget.id === idChildren);
                 widgetsHijos.push(widgetHijo);
               });
-              let lineaProblema = widgets.find(widget => widget.type == tiposFrame.tipoLine && widget.style.lineColor == colores.colorLineaProblema);
+              let lineaProblema = widgets.find(widget => widget.type == tiposFrame.tipoLine && widget.endWidgetId == event.data[0].id);
               if(lineaProblema){
                 let widgetReferencia = widgets.find(x => x.id == lineaProblema.startWidgetId);
                 let frameReferencia = findFrameParent(widgetReferencia.id);
@@ -84,12 +83,6 @@
               console.log("Linea encontrada", lineaProblema);
               console.log("widgets hijos encontrados", widgetsHijos);
               console.log("widgets A actualizar", widgetActualizar);
-              if (widgetActualizar) {
-                setTimeout(async () => {
-                  await miro.board.widgets.update({ id: widgetActualizar.id, text: `Esta es la respuesta de ADA numero ramdom es ${Math.random()}` });
-                }, 2000);
-              }
-
             }
           }
 
