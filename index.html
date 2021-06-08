@@ -33,6 +33,7 @@
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': `${URL_SERVICES}problema/`,
+        'Access-Control-Allow-Methods': 'PUT'
       }
     });
      return await response.json(); 
@@ -97,10 +98,10 @@
                 //Se arma la peticion al servicio
                 let peticion = {};
       
-                peticion.problema = diferenciaWG.planinText;
-                peticion.meta = metaFinalWG.planinText;
-                peticion.situacion_ideal = situacionIdealWG.planinText;
-                peticion.situacion_actual = situacionActualWG.planinText;
+                peticion.problema = diferenciaWG.plainText;
+                peticion.meta = metaFinalWG.plainText;
+                peticion.situacion_ideal = situacionIdealWG.plainText;
+                peticion.situacion_actual = situacionActualWG.plainText;
                 
                 console.log("La peticion al servicio es ", peticion)
                 const rtaProblemas = await getProblemas(peticion);
