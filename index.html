@@ -19,8 +19,12 @@
       tipoLine: "LINE"
     };
 
-
+   
     var widgets = [];
+
+    findFrameParent = (idElement)=>{
+      widgets.find(widget => widget.type == tiposFrame.tipoframe && widget.childrenIds.includes(idElement));
+    }
 
     miro.onReady(() => {
       miro.initialize({
@@ -68,7 +72,7 @@
               let lineaProblema = widgets.find(widget => widget.type == tiposFrame.tipoLine && widget.style.lineColor == colores.colorLineaProblema);
               if(lineaProblema){
                 let widgetReferencia = widgets.find(x => x.id == lineaProblema.startWidgetId);
-                let frameReferencia = widgets.find(widget => widget.type == tiposFrame.tipoframe && widget.childrenIds.includes(widgetReferencia.id));
+                let frameReferencia = findFrameParent(widgetReferencia.id);
                 if(frameReferencia){
 
                 }
