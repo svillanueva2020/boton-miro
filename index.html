@@ -61,12 +61,12 @@
                 widgetsHijos.push(widgetHijo);
               });
 
-              let lineaBtn = widgetsHijos.find(widget => (widget.endWidgetId ? widget.endWidgetId == event.data[0].id : false));
+              let lineaProblema = widgets.find(widget => (widget.endWidgetId ? widget.endWidgetId == event.data[0].id : false));
               let widgetActualizar = [];
-              if (lineaBtn) {
-                widgetActualizar = widgetsHijos.find(widget => widget.id == lineaBtn.endWidgetId);
+              if (lineaProblema) {
+                widgetActualizar = widgetsHijos.find(widget => widget.id == lineaProblema.endWidgetId);
               }
-              console.log("Linea encontrada", lineaBtn);
+              console.log("Linea encontrada", lineaProblema);
               console.log("widgets hijos encontrados", widgetsHijos);
               console.log("widgets A actualizar", widgetActualizar);
               if (widgetActualizar) {
