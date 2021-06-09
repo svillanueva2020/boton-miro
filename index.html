@@ -150,32 +150,14 @@
                   });
             }
             console.log("Los hijos en causa raiz", widgetsCausaRaiz);
-            //obtener los elementos para la pregunta 1
-            let flechasPregunta1 = [];
-    
-            widgetsCausaRaiz.forEach(widget => {
-              if(widget.type == tiposFrame.tipoLine && widget.style.lineColor == colores.colorFlechaPregunta1){
-                flechasPregunta1.push(widget);
-              }
-            });
-            flechasPregunta1 = flechasPregunta1.sort((a, b)=>a.startPosition.y > b.startPosition.y);
-            console.log("Las flechas son", flechasPregunta1)
-            let respuesta = "";
-
-            try {
-              flechasPregunta1.forEach(linea =>{
-              let widget = widgetsCausaRaiz.find(x => x.id == linea.endWidgetId);
-              if(widget && widget.plainText){
-                respuesta = widget.plainText;
-              }
-            })  
-            } catch (e) {
-              console.log("No se encontro una respuesta", e)
-            }
-            if(respuesta == ""){
-              respuesta = flechasPregunta1[flechasPregunta1.length -1].plainText;
-            }
-            console.log("la respuesta es ", respuesta);
+            let pregunta1 = getPreguntasCausaRaiz(widgetsCausaRaiz, colores.colorFlechaPregunta1)
+            let pregunta2 = getPreguntasCausaRaiz(widgetsCausaRaiz, colores.colorFlechaPregunta2)
+            let pregunta3 = getPreguntasCausaRaiz(widgetsCausaRaiz, colores.colorFlechaPregunta3)
+            let pregunta4 = getPreguntasCausaRaiz(widgetsCausaRaiz, colores.colorFlechaPregunta4)
+            console.log("la respuesta es ", pregunta1);
+            console.log("la respuesta es ", pregunta2);
+            console.log("la respuesta es ", pregunta3);
+            console.log("la respuesta es ", pregunta4);
           }
 
         }
@@ -183,6 +165,32 @@
       miro.addListener('SELECTION_UPDATED', handleSelectionUpdated);
     });
 
+    getPreguntasCausaRaiz = (widgetsCausaRaiz, colorFila)=>{
+      let flechasPregunta = [];
+    
+        widgetsCausaRaiz.forEach(widget => {
+          if(widget.type == tiposFrame.tipoLine && widget.style.lineColor == colorFila){
+            flechasPregunta.push(widget);
+          }
+        });
+        flechasPregunta = flechasPregunta.sort((a, b)=>a.startPosition.y > b.startPosition.y);
+        let respuesta = "";
+
+        try {
+          flechasPregunta.forEach(linea =>{
+          let widget = widgetsCausaRaiz.find(x => x.id == linea.endWidgetId);
+          if(widget && widget.plainText){
+            respuesta = widget.plainText;
+          }
+        })  
+        } catch (e) {
+          console.log("No se encontro una respuesta", e)
+        }
+        if(respuesta == ""){
+          respuesta = flechasPregunta[0].plainText;
+        }
+        
+    }
 
 
   </script>
