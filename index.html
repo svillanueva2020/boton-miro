@@ -135,7 +135,7 @@
             if(lineaReferencia){
 
                //obtengo un widget de referencia para encontrar el frame donde se encuentra la sección de causa raiz
-               let widgetReferencia = widgets.find(x => x.id == lineaProblema.startWidgetId);
+               let widgetReferencia = widgets.find(x => x.id == lineaReferencia.startWidgetId);
                let frameCausaRaiz = findFrameParent(widgetReferencia.id);
 
               console.log("Frame causa raiz, ", frameCausaRaiz);
