@@ -150,6 +150,7 @@
             console.log("Los hijos en causa raiz", widgetsCausaRaiz);
             //obtener los elementos para la pregunta 1
             let flechasPregunta1 = [];
+    
             widgetsCausaRaiz.forEach(widget => {
               if(widget.type == tiposFrame.tipoLine && widget.style.lineColor == colores.colorFlechaPregunta1){
                 flechasPregunta1.push(widget);
@@ -158,14 +159,19 @@
             flechasPregunta1 = flechasPregunta1.sort((a, b)=>a.startPosition.x < b.startPosition.x);
             console.log("Las flechas son", flechasPregunta1)
 
-            let respuesta = "";
+            try {
+              let respuesta = "";
             flechasPregunta1.forEach(linea =>{
               let widget = widgetsCausaRaiz.find(x => x.id = linea.endWidgetId);
               if(widget && widget.plainText){
                 respuesta = widget.plainText;
-                break;
+                throw BreakException;
               }
-            })
+            })  
+            } catch (e) {
+              if (e == BreakException)
+              console.debug("Se encontro una respuesta")
+            }
             if(respuesta == ""){
               respuesta = flechasPregunta1[flechasPregunta1.length -1].plainText;
             }
