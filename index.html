@@ -150,7 +150,11 @@
             console.log("Los hijos en causa raiz", widgetsCausaRaiz);
             //obtener los elementos para la pregunta 1
             let flechasPregunta1 = [];
-            flechasPregunta1 = widgetsCausaRaiz.includes(colores.colorFlechaPregunta1);
+            widgetsCausaRaiz.forEach(widget => {
+              if(widget.type == tiposFrame.tipoLine && widget.style.lineColor == colores.colorFlechaPregunta1){
+                flechasPregunta1.push(widget);
+              }
+            });
             console.log("Las flechas son", flechasPregunta1)
           }
 
