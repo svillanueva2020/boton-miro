@@ -11,7 +11,12 @@
       colorMetaFinal: "#fef445",
       colorSituacionIdeal : "#fac710", 
       colorSituacionActual: "#f24726",
-      colorDiferencia: "#e6e6e6"
+      colorDiferencia: "#e6e6e6",
+      colorFlechaPregunta1: "#72e18e",
+      colorFlechaPregunta2: "#2a4aab",
+      colorFlechaPregunta3: "#e96b62",
+      colorFlechaPregunta4: "#3c2196",
+
     };
     const tiposFrame = {
       tipoframe: "FRAME",
@@ -74,11 +79,8 @@
       async function handleSelectionUpdated(event) {
         let widgetsHijos = [];
         let widgetSeleccionado;
-        console.log("El boton que activo el evento", event)
         if (event.data[0] && event.data[0].id) {
           widgetSeleccionado = widgets.find(widget => widget.id === event.data[0].id);
-          console.log("El widget Seleccionado ", widgetSeleccionado)
-
           if (widgetSeleccionado && widgetSeleccionado.style && widgetSeleccionado.style.borderColor == colores.colorBoton) {
             console.log("el evento es", event);
               let lineaProblema = widgets.find(widget => widget.type == tiposFrame.tipoLine && widget.endWidgetId == event.data[0].id);
@@ -131,6 +133,7 @@
           if (widgetSeleccionado && widgetSeleccionado.style && widgetSeleccionado.style.borderColor == colores.colorBotonContramedida) {
             console.log("Ingreso por el boton de contramedida", event);
             let widgetsCausaRaiz = [];
+            
             let lineaReferencia = widgets.find(widget => widget.type == tiposFrame.tipoLine && widget.endWidgetId == event.data[0].id);
             if(lineaReferencia){
 
@@ -145,6 +148,9 @@
                   });
             }
             console.log("Los hijos en causa raiz", widgetsCausaRaiz);
+            //obtener los elementos para la pregunta 1
+            let flechasPregunta1 = widgetsCausaRaiz.find(widget.style.lineColor == colores.colorFlechaPregunta1);
+            console.log("Las flechas son", flechasPregunta1)
           }
 
         }
