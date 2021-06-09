@@ -155,6 +155,7 @@
                 flechasPregunta1.push(widget);
               }
             });
+            flechasPregunta1 = flechasPregunta1.sort((a, b)=>a.startPosition.x < b.startPosition.x);
             console.log("Las flechas son", flechasPregunta1)
           }
 
