@@ -158,10 +158,10 @@
             });
             flechasPregunta1 = flechasPregunta1.sort((a, b)=>a.startPosition.x < b.startPosition.x);
             console.log("Las flechas son", flechasPregunta1)
+            let respuesta = "";
 
             try {
-              let respuesta = "";
-            flechasPregunta1.forEach(linea =>{
+              flechasPregunta1.forEach(linea =>{
               let widget = widgetsCausaRaiz.find(x => x.id = linea.endWidgetId);
               if(widget && widget.plainText){
                 respuesta = widget.plainText;
