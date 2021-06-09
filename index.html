@@ -165,12 +165,11 @@
               let widget = widgetsCausaRaiz.find(x => x.id = linea.endWidgetId);
               if(widget && widget.plainText){
                 respuesta = widget.plainText;
-                throw BreakException;
+                throw new Error("Se interrumpe el flujo");
               }
             })  
             } catch (e) {
-              if (e == BreakException)
-              console.debug("Se encontro una respuesta")
+              console.log("Se encontro una respuesta")
             }
             if(respuesta == ""){
               respuesta = flechasPregunta1[flechasPregunta1.length -1].plainText;
