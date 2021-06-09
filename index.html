@@ -82,6 +82,7 @@
         if (event.data[0] && event.data[0].id) {
           widgetSeleccionado = widgets.find(widget => widget.id === event.data[0].id);
           if (widgetSeleccionado && widgetSeleccionado.style && widgetSeleccionado.style.borderColor == colores.colorBoton) {
+            widgets = await miro.board.widgets.get();
             console.log("el evento es", event);
               let lineaProblema = widgets.find(widget => widget.type == tiposFrame.tipoLine && widget.endWidgetId == event.data[0].id);
               if(lineaProblema){
@@ -131,6 +132,7 @@
           }
 
           if (widgetSeleccionado && widgetSeleccionado.style && widgetSeleccionado.style.borderColor == colores.colorBotonContramedida) {
+            widgets = await miro.board.widgets.get();
             console.log("Ingreso por el boton de contramedida", event);
             let widgetsCausaRaiz = [];
             
