@@ -49,6 +49,18 @@
      return respuesta.descripcion;
     }
 
+    const getCausa = async (peticion) => {
+    const response = await fetch(`${URL_SERVICES}causa/`, {
+      method: 'POST',
+      body: JSON.stringify(peticion), 
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+     let respuesta =  await response.json(); 
+     return respuesta.descripcion;
+    }
+
     miro.onReady(() => {
       miro.initialize({
         extensionPoints: {
@@ -150,14 +162,31 @@
                   });
             }
             console.log("Los hijos en causa raiz", widgetsCausaRaiz);
-            let pregunta1 = getPreguntasCausaRaiz(widgetsCausaRaiz, colores.colorFlechaPregunta1)
-            let pregunta2 = getPreguntasCausaRaiz(widgetsCausaRaiz, colores.colorFlechaPregunta2)
-            let pregunta3 = getPreguntasCausaRaiz(widgetsCausaRaiz, colores.colorFlechaPregunta3)
-            let pregunta4 = getPreguntasCausaRaiz(widgetsCausaRaiz, colores.colorFlechaPregunta4)
-            console.log("la respuesta es ", pregunta1);
-            console.log("la respuesta es ", pregunta2);
-            console.log("la respuesta es ", pregunta3);
-            console.log("la respuesta es ", pregunta4);
+            let causa1 = getPreguntasCausaRaiz(widgetsCausaRaiz, colores.colorFlechaPregunta1)
+            let causa2 = getPreguntasCausaRaiz(widgetsCausaRaiz, colores.colorFlechaPregunta2)
+            let causa3 = getPreguntasCausaRaiz(widgetsCausaRaiz, colores.colorFlechaPregunta3)
+            let causa4 = getPreguntasCausaRaiz(widgetsCausaRaiz, colores.colorFlechaPregunta4)
+          
+            let peticion = {}
+            peticion.causa_1 = causa1;
+            peticion.causa_2 = causa2;
+            peticion.causa_3 = causa3;
+            peticion.causa_4 = causa4;
+
+            console.log("La peticion al servicio es ", peticion)
+            const rtaCausa = await getCausa(peticion);
+
+            //obtenemos el elemento que se va a actualizar 
+            let elementoActualizar = findElementToUpdate(event.data[0].id);
+            if(elementoActualizar && rtaCausa){
+                    console.log("Elemento a actualizar", elementoActualizar);
+                    console.log("Respuesta del servicio", rtaCausa);
+                    let textToShow = "";
+                      for (const it in rtaCausa) {
+                        textToShow = textToShow.concat("<p>"+rtaCausa[it]+"</p>");  
+                      }
+                    miro.board.widgets.update({ id: elementoActualizar.id, text:  textToShow});
+                }
           }
 
         }
